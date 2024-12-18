@@ -23,6 +23,10 @@ def test_speed():
         })
     except Exception as e:
         return jsonify({'error': str(e)})
-
+        
+# Serve the static sitemap.xml file
+@app.route('/sitemap.xml', methods=['GET'])
+def sitemap():
+    return send_from_directory('.', 'sitemap.xml', mimetype='application/xml')
 if __name__ == '__main__':
     app.run()
