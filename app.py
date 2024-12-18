@@ -1,8 +1,7 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, send_from_directory
 import speedtest
 
-
-app = Flask(__name__,template_folder='templates')
+app = Flask(__name__, template_folder='templates')
 
 @app.route('/')
 def index():
@@ -23,10 +22,16 @@ def test_speed():
         })
     except Exception as e:
         return jsonify({'error': str(e)})
-        
+
 # Serve the static sitemap.xml file
 @app.route('/sitemap.xml', methods=['GET'])
 def sitemap():
     return send_from_directory('.', 'sitemap.xml', mimetype='application/xml')
+
+@app.route('/robots.txt', methods=['GET'])
+def robots_txt():
+    response = Response("User-agent: *\nDisallow:\nSitemap: /sitemap.xml", mimetype="text/plain")
+    return response
+
 if __name__ == '__main__':
     app.run()
