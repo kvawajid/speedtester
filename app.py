@@ -30,13 +30,7 @@ def sitemap():
 
 @app.route('/robots.txt', methods=['GET'])
 def robots_txt():
-    robots_content = """
-    User-agent: *
-    Disallow:
-
-    Sitemap: /sitemap.xml
-    """
-    return Response(robots_content.strip(), mimetype="text/plain")
+    return send_from_directory('.', 'robots.txt', mimetype='text/plain')
 
 if __name__ == '__main__':
     app.run()
