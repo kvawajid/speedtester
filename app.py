@@ -28,6 +28,10 @@ def test_speed():
 def sitemap():
     return send_from_directory('.', 'sitemap.xml', mimetype='application/xml')
 
+@app.route('/BingSiteAuth.xml', methods=['GET'])
+def bingsitemap():
+    return send_from_directory('.', 'BingSiteAuth.xml', mimetype='application/xml')
+
 @app.route('/robots.txt', methods=['GET'])
 def robots_txt():
     return send_from_directory('.', 'robots.txt', mimetype='text/plain')
